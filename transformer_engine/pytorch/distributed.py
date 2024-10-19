@@ -254,14 +254,14 @@ def _get_active_autocast_contexts():
 
     gpu_autocast_enabled = torch.is_autocast_enabled()
     gpu_autocast_dtype = torch.get_autocast_gpu_dtype()
-    gpu_autocast_ctx = torch.cuda.amp.autocast(
-        gpu_autocast_enabled, gpu_autocast_dtype, autocast_cached
+    gpu_autocast_ctx = torch.amp.autocast("cuda", 
+        gpu_autocast_dtype, gpu_autocast_enabled, autocast_cached
     )
 
     cpu_autocast_enabled = torch.is_autocast_cpu_enabled()
     cpu_autocast_dtype = torch.get_autocast_cpu_dtype()
-    cpu_autocast_ctx = torch.cpu.amp.autocast(
-        cpu_autocast_enabled, cpu_autocast_dtype, autocast_cached
+    cpu_autocast_ctx = torch.amp.autocast("cpu", 
+        cpu_autocast_dtype, cpu_autocast_enabled, autocast_cached
     )
 
     return gpu_autocast_ctx, cpu_autocast_ctx
